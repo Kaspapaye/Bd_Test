@@ -1,0 +1,18 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter
+        run: |
+          git clone https://github.com/flutter/flutter.git -b stable
+          echo "${{ github.workspace }}/flutter/bin" >> $GITHUB_PATH
+      - name: Run tests
+        run: flutter test
